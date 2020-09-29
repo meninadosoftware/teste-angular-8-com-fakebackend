@@ -1,0 +1,158 @@
+﻿<nav class="navbar navbar-light mb-5" style="background-color:tomato;">
+  <span class="navbar-text" style="color: black;">
+    <h6>Olá! {{ currentUser.firstName }}</h6>
+      <p>Bem vindo(a). Você está logado(a) !</p>
+  </span>
+    <div class="d-flex justify-content-end" *ngIf="currentUser">
+      <button  class="btn btn-danger" type="button"   (click)="logout()" >
+        Logout  
+      </button>
+      </div>  
+</nav>
+
+     
+
+<div class="card text-center">
+  <div class="card-body">
+    <div class="col-12">
+      <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+          Gerenciamento de seguros
+        </li>
+      </ol>
+    </nav>
+  </div>
+</div>
+    <div class="container mb-5">
+      <div class="card list-car">
+        <h5 class="card-header">Lista de seguros</h5>
+        <div class="card-body">
+          <div class="table-responsive-md">
+          <table class="table">
+            <thead class="bg-danger ">
+              <tr>
+                <th class="all" scope="col">Código</th>
+                <th class="desktop" scope="col">Tipo</th>
+                <th class="desktop"  scope="col">Plano</th>
+                <th class="desktop"  scope="col">Preço</th>
+                <th class="desktop"  scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let s of seguros">
+                <td>{{ s.cod }}</td>
+                <td>{{ s.tipo }}</td>
+                <td>{{ s.plano }}</td>
+                <td>{{ s.price  }}</td>
+                <td class=" d-flex justify-content-end">
+                  <button
+                    type="button"
+                    class="btn btn-warning btn-sm mr-2 mb-2"
+                    (click)="editCar(s)"
+                  >
+                    Editar
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-sm ml-1"
+                    (click)="deleteCar(s)"
+                  >
+                    Deletar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </div>
+    </div>
+      <div class="card add-car">
+        <h5 class="card-header">Adicionar/Atualizar seguro</h5>
+        <div class="card-body">
+          <form
+            id="add-form"
+            (ngSubmit)="f.form.valid && saveSeguro(f)"
+            #f="ngForm"
+            novalidate
+          >
+            <div class="form-group">
+              <label for="tipo">Tipo:</label>
+              <input
+                type="text"
+                [(ngModel)]="seguros.tipo"
+                id="tipo"
+                name="tipo"
+                #tipo="ngModel"
+                required
+                class="form-control"
+                [ngClass]="{ 'is-invalid': f.submitted && tipo.invalid }"
+                placeholder="Digite o tipo"
+              />
+              <div
+                *ngIf="f.submitted && tipo.invalid"
+                class="invalid-feedback"
+              >
+                <div *ngIf="tipo.errors.required">Tipo é obrigatório</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="color">Plano:</label>
+              <input
+                type="text"
+                [(ngModel)]="seguros.plano"
+                id="plano"
+                name="plano"
+                #plano="ngModel"
+                required
+                class="form-control"
+                [ngClass]="{ 'is-invalid': f.submitted && plano.invalid }"
+                placeholder="Digite o plano"
+              />
+              <div
+                *ngIf="f.submitted && plano.invalid"
+                class="invalid-feedback"
+              >
+                <div *ngIf="plano.errors.required">Plano é obrigatório</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="price">Preço</label>
+              <input
+                type="number"
+                [(ngModel)]="seguros.price"
+                id="price"
+                name="price"
+                #price="ngModel"
+                required
+                class="form-control"
+                [ngClass]="{ 'is-invalid': f.submitted && price.invalid }"
+                placeholder="Digite o preço"
+              />
+              <div
+                *ngIf="f.submitted && price.invalid"
+                class="invalid-feedback"
+              >
+                <div *ngIf="price.errors.required">Preço é obrigatório</div>
+              </div>
+            </div>
+             <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-success btn-add-car mr-2">
+              Salvar
+            </button>
+            <button
+              type="reset"
+              class="btn btn-secondary btn-add-car"
+              (click)="cleanForm(f)"
+            >
+              Cancelar
+            </button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+

@@ -1,0 +1,22 @@
+{
+  "seguros": [
+    {
+      "codigo": 1,
+      "tipo": "Saúde",
+      "plano": "Simples",
+      "price": 455.7
+    },
+    {
+      "codigo": 2,
+      "tipo": "Veículos",
+      "plano": "Básico",
+      "price": 455.7
+    },
+    {
+      "codigo": 3,
+      "tipo": "Imóveis",
+      "plano": "Simples",
+      "price": 455.7
+    }
+  ]
+}
